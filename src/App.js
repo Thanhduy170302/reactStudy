@@ -13,8 +13,8 @@ class App extends React.Component {
     return (
       <div>
         hello world với Thanh Duy &amp; CN20CLCB
-        {/* <MyComponent/> */}
-       <Demo/>
+        <MyComponent/>
+       {/* <Demo/> */}
         
       </div>
     );
