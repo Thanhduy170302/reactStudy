@@ -1,35 +1,50 @@
 import React from "react";
 class DisplayInfor extends React.Component {
+
+    state = {
+        isShowListUser: true
+    }
+    handleShowHide = () => {
+       this.setState({
+        isShowListUser:!this.state.isShowListUser
+       })
+    }
     render() {
         //destructuring aray
         const { listUsers } = this.props;//object
-
         //=là: const listUsers=this.props.listUsers
 
         //props=> Viết tắt của từ properties
+
         return (
             <div>
+
+                <div>
+                    <span onClick={() => { this.handleShowHide() }}>
+                        
+                        {this.state.isShowListUser===true ? "Hide list user":"Show list user"}
+                        </span>
+                </div>
                 {listUsers.map((user, index) => {
-
                     return (
-                        <div key={user.id}>
-
-                            <div>My name's {user.name}</div>
-                            <div>My age's  {user.age} </div>
-                            <hr />
+                        <div>
+                            {
+                                this.state.isShowListUser &&
+                                <div key={user.id} className={+user.age > 21 ? "green" : "red"}>
+                                    <div>My name's {user.name}</div>
+                                    <div>My age's  {user.age} </div>
+                                    <hr />
+                                </div>
+                            }
                         </div>
                     )
+
                 })}
-                {/* <div>My name's  {name}</div>
-                <div>My age's   {age}</div>
-                <hr/>
-                <div>My name's  {name}</div>
-                <div>My age's   {age}</div>
-                <hr/>
-                <div>My name's  {name}</div>
-                <div>My age's   {age}</div> */}
+
             </div>
+
         )
+
     }
 }
 
