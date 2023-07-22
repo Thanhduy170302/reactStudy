@@ -11,8 +11,8 @@ class App extends React.Component {
   
   render() {
     return (
-      <div>
-        hello world với Thanh Duy &amp; CN20CLCB
+      <div className='app-container'>
+        {/* hello world với Thanh Duy &amp; CN20CLCB */}
         <MyComponent/>
        {/* <Demo/> */}
         

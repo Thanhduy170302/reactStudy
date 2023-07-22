@@ -3,8 +3,29 @@ import './DisplayInfor.scss'
 import logo from '../logo.svg'
 class DisplayInfor extends React.Component {
 
-    state = {
-        isShowListUser: true
+    constructor(props) {
+        console.log(">>>call constructor: 1");
+        super(props);
+        this.state = {
+            isShowListUser: true
+        }
+    }
+
+    componentDidMount() {
+        console.log(">>> call me component đi mount");
+        setTimeout(() => {
+            document.title = "Thanh Duy và những người bạn"
+        }, 3000);
+    }
+
+    componentDidUpdate(prevProps) {
+        console.log(">>> call me component did update", this.props, prevProps)
+        if (this.props.listUsers !== prevProps.listUsers) {
+            if (this.props.listUsers.length === 5) {
+                alert('you got 5 users')
+            }
+        }
+
     }
     handleShowHide = () => {
         this.setState({
@@ -12,6 +33,7 @@ class DisplayInfor extends React.Component {
         })
     }
     render() {
+        console.log(">>> call me render");
         //destructuring aray
         const { listUsers } = this.props;//object
         //=là: const listUsers=this.props.listUsers
@@ -20,7 +42,7 @@ class DisplayInfor extends React.Component {
 
         return (
             <div className="display-infor-container">
-                <img src={logo}/>
+                {/* <img src={logo}/> */}
 
                 <div>
                     <span onClick={() => { this.handleShowHide() }}>
@@ -33,13 +55,19 @@ class DisplayInfor extends React.Component {
                         <div>
                             {
                                 this.state.isShowListUser &&
+
                                 <div key={user.id} className={+user.age > 21 ? "green" : "red"}>
                                     <div >My name's {user.name}</div>
                                     <div>My age's  {user.age} </div>
                                     <hr />
                                 </div>
                             }
+                            <div>
+                                <button onClick={() => this.props.handleDeleteUser(user.id)}>Delete</button>
+                            </div>
+                            <hr />
                         </div>
+
                     )
 
                 })}
