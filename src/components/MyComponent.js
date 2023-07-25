@@ -1,48 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import DisplayInfor from "./DisplayInfor";
 import AddUserInfor from "./AddUserInfor";
 
-class MyComponent extends React.Component {
-    state = {
-        listUsers: [
+const MyComponent = (props) => {
+
+    const [listUsers, setListUsers] = useState(
+        [
             { id: 1, name: "ThanhDuy", age: "21" },
             { id: 2, name: "Dev", age: "31" },
             { id: 3, name: "DuyTran", age: "41" },
         ]
-    }
+    )
 
-    handleAddNewUser = (userObj) => {
-       // console.log("Check data from parent: ", userObj);
-        this.setState({
-            listUsers: [userObj,...this.state.listUsers]
+
+
+    const handleAddNewUser = (userObj) => {
+        setListUsers(
+            [userObj, ...listUsers]
+        )
+    }
+    const handleDeleteUser = (userId) => {
+        let listUserClone = listUsers
+        listUserClone = listUserClone.filter(item => item.id !== userId)
+        setListUsers({
+            listUserClone
         })
     }
-    handleDeleteUser=(userId)=>{
-        let listUserClone=[...this.state.listUsers]
-        listUserClone=listUserClone.filter(item=>item.id !==userId)
-        this.setState({
-            listUsers:listUserClone
-        })
-    }
-    render() {
-        return (
-            <div>
-                <AddUserInfor
-                    handleAddNewUser={this.handleAddNewUser}
 
-                />
-                <br></br>
-                <DisplayInfor
-                    listUsers={this.state.listUsers}
-                    handleDeleteUser={this.handleDeleteUser}
-                />
+    return (
+        <div>
+            <AddUserInfor
+                handleAddNewUser={handleAddNewUser}
+
+            />
+            <br></br>
+            <DisplayInfor
+                listUsers={listUsers}
+                handleDeleteUser={handleDeleteUser}
+            />
 
 
 
-            </div>
+        </div>
 
-        );
-    }
+    );
 }
 
 export default MyComponent;
