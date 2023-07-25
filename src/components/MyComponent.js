@@ -22,9 +22,7 @@ const MyComponent = (props) => {
     const handleDeleteUser = (userId) => {
         let listUserClone = listUsers
         listUserClone = listUserClone.filter(item => item.id !== userId)
-        setListUsers({
-            listUserClone
-        })
+        setListUsers(listUserClone)
     }
 
     return (

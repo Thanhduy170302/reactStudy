@@ -1,47 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './DisplayInfor.scss'
 import logo from '../logo.svg'
 import { useState } from "react";
-// class DisplayInfor extends React.Component {
-//     render() {
-//         console.log(">>> call me render");
-//         //destructuring aray
-//         const { listUsers } = this.props;//object
-//         //=là: const listUsers=this.props.listUsers
 
-//         //props=> Viết tắt của từ properties
-
-//         return (
-//             <div className="display-infor-container">
-
-//                 {listUsers.map((user, index) => {
-//                     return (
-//                         <div>
-//                             {
-//                                 true &&
-
-//                                 <div key={user.id} className={+user.age > 21 ? "green" : "red"}>
-//                                     <div >My name's {user.name}</div>
-//                                     <div>My age's  {user.age} </div>
-//                                     <hr />
-//                                 </div>
-//                             }
-//                             <div>
-//                                 <button onClick={() => this.props.handleDeleteUser(user.id)}>Delete</button>
-//                             </div>
-//                             <hr />
-//                         </div>
-
-//                     )
-
-//                 })}
-
-//             </div>
-
-//         )
-
-//     }
-// }
 
 const DisplayInfor = (props) => {
 
@@ -53,6 +14,16 @@ const DisplayInfor = (props) => {
         setShowHideListUser(!isShowHideListUser)
     }
 
+    console.log(">>call me render");
+    useEffect(
+        ()=>{
+            if(listUsers.length===0)
+            {
+                alert("you deleted all the users")
+            }
+        console.log(">>>call me useeffect");
+    },[listUsers]
+    );
         return (
             <div className="display-infor-container">
 
@@ -65,7 +36,7 @@ const DisplayInfor = (props) => {
 
                 {listUsers.map((user, index) => {
                     return (
-                        <div>
+                        <div key={user.id}>
                             {
                                 isShowHideListUser &&
 
